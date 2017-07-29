@@ -6,7 +6,7 @@ It implements core associations and robust seed data so you can jump in and test
 There are also some advanced, commonly needed query scopes you can learn from (like selecting last book of every author).  
 
 This is the data model:  
-![Image of SampleRailsApp data structure erd](https://github.com/Epigene/rails-example/images/data_structure.png)
+![Image of SampleRailsApp data structure erd](https://github.com/Epigene/rails-example/blob/master/images/data_structure.png)
 
 ## Installation
 
@@ -21,5 +21,5 @@ You have rspec and factory girl with core factories set up to use as you please.
 Alternatively, you can perform raw queries on the seeded development database by running `rails dbconsole` and then some SQL.  
 
 ## Contributing
-You will probably want to just fork this repo and hack on the copy however you like.
+You will probably want to just fork this repo and hack on the copy however you like.  
 If, however, you think that this core repo could use an update, open an issue and we will come to an agreement on what to do. :star:
