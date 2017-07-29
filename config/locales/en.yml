@@ -1,0 +1,10 @@
+en:
+  hello: "Hello world"
+
+  activerecord:
+    errors:
+      models:
+        genre:
+          attributes:
+            identifier:
+              unsupported_identifier: "Genre names must be lowercase latin or numbers"
