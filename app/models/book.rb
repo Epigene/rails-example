@@ -37,4 +37,15 @@ class Book < ApplicationRecord
 
     where(id: find_by_sql(LAST_BOOK_QUERY))
   }
+
+  # NB, this is some 500 times faster than v1, best version yet!
+  scope :authors_last_books3, -> {
+    # differs from v1 in that this uses find_by_sql that returns an array of hashes as opposed to execute's PG object that can be plucked
+
+    joins("JOIN (#{LAST_BOOK_QUERY3}) AS add ON add.id = #{table_name}.id")
+
+    #=>
+    # SELECT "books".* FROM "books" JOIN (SELECT t1.id FROM books t1 LEFT OUTER JOIN books t2 ON t1.author_id = t2.author_id AND ( (t1.published_on < t2.published_on) OR (t1.published_on = t2.published_on AND t1.id < t2.id) ) WHERE ( t2.author_id IS NULL )) AS add ON add.id = books.id
+
+  }
 end

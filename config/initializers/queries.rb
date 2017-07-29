@@ -15,3 +15,4 @@ HEREDOC
 query = query.gsub(%r'\n', ' ').gsub(%r'\s{2,}', ' ').strip
 
 LAST_BOOK_QUERY = query.freeze
+LAST_BOOK_QUERY3 = query.gsub(%r'\;.*\z', '').freeze

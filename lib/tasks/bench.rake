@@ -6,6 +6,7 @@ namespace :bench do
     Benchmark.bmbm do |x|
       x.report("Book.authors_last_books") { 100.times { Book.authors_last_books } }
       x.report("Book.authors_last_books2")  { 100.times { Book.authors_last_books2 } }
+      x.report("Book.authors_last_books3")  { 100.times { Book.authors_last_books3 } }
     end
   end
 

@@ -52,6 +52,20 @@ RSpec.describe Book, type: :model do
         end
       end
     end
+
+    describe ".authors_last_books3" do
+      subject { described_class.authors_last_books3 }
+
+      context "when called with database contents 1" do
+        before do
+          book_set_up_1
+        end
+
+        it "collects the two books that are their author's last books based on publishing date" do
+          expect(subject.pluck("books.id")).to contain_exactly(@last1.id, @last2.id)
+        end
+      end
+    end
   end
 
 end
