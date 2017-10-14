@@ -1,16 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-
-# Clean db
-  require 'database_cleaner'
-  DatabaseCleaner.strategy = :truncation
-  DatabaseCleaner.clean
-  puts "> CLEANED DB!"
+require "profiling_helper"
+require 'database_cleaner'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -29,4 +24,18 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
+  # Database cleaner setup
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end

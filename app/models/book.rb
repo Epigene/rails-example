@@ -19,6 +19,8 @@ class Book < ApplicationRecord
   has_many :book_genres
   has_many :genres, through: :book_genres
 
+  after_save :do_something
+
   validates :identifier, :title, :published_on, presence: true
   validates :author, :author_id, :publisher, :publisher_id, presence: true
 
@@ -48,4 +50,27 @@ class Book < ApplicationRecord
     # SELECT "books".* FROM "books" JOIN (SELECT t1.id FROM books t1 LEFT OUTER JOIN books t2 ON t1.author_id = t2.author_id AND ( (t1.published_on < t2.published_on) OR (t1.published_on = t2.published_on AND t1.id < t2.id) ) WHERE ( t2.author_id IS NULL )) AS add ON add.id = books.id
 
   }
+
+  def by_bce_autor?
+    author.bce?
+  end
+
+  def of_publisher?(publisher_n)
+    publisher_name == publisher_n
+  end
+
+  def vampire_title?
+    title.to_s.match?(%r'vamp[iy]re'i)
+  end
+
+  def with_characteristics?(characteristics_hash)
+    author.name == characteristics_hash[:author_name] &&
+      publisher.name == characteristics_hash[:publisher_name]
+  end
+
+  private
+    def do_something
+      ApplicationRecord.class
+    end
+
 end

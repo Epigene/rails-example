@@ -46,4 +46,16 @@ class Author < ApplicationRecord
   scope :order_by_book_count, -> {
     with_book_count.order("book_count DESC")
   }
+
+  def bce?
+    dob < "0-1-1".to_date
+  end
+
+  def been_published_by?(publisher_name)
+    publishers.where(name: publisher_name).exists?
+  end
+
+  def prolific?
+    books.size > 3
+  end
 end

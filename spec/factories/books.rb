@@ -21,10 +21,16 @@ FactoryGirl.define do
     published_on { "2000-05-05".to_date }
 
     #== traits below ==
+
     trait :horror do
       after(:create) do |book|
         create(:book_genre, :horror, book_id: book.id)
       end
     end
+
+    trait :by_bce_author do
+      author { create(:author, :bce_dob) }
+    end
+
   end
 end

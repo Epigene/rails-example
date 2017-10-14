@@ -14,9 +14,13 @@ FactoryGirl.define do
   factory :author do
     sequence(:identifier, 1) { |i| "Author#{i}" }
     sequence(:name, 1) { |i| "Pen name #{i}" }
-    dob  { 28.years.ago.to_date }
+    dob { 28.years.ago.to_date }
 
     #== traits below ==
+
+    trait :bce_dob do
+      dob { "98-01-01 BC".to_date }
+    end
 
     trait :with_one_book do
       after(:create) do |author|

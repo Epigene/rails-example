@@ -19,3 +19,6 @@
 .byebug_history
 config/database.yml
 erd.pdf
+
+spec/group_profiling_results.csv
+spec/profiling_results.csv

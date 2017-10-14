@@ -20,6 +20,14 @@ This is the data model:
 You have rspec and factory girl with core factories set up to use as you please.  
 Alternatively, you can perform raw queries on the seeded development database by running `rails dbconsole` and then some SQL.  
 
+## Spec setup strategy benchmarking
+As of 2017-10-15 this repo implements RSpec profiling to determine how fast different setup strategies are. See [the writeup](https://todo.com).
+
+```
+$ rspec spec/setup_benchmark.rb
+# and look at the output of spec/group_profiling_results.csv
+```
+
 ## Contributing
 You will probably want to just fork this repo and hack on the copy however you like.  
 If, however, you think that this core repo could use an update, open an issue and we will come to an agreement on what to do. :star:

@@ -30,9 +30,7 @@ RSpec.describe Author, type: :model do
       subject { described_class.order_by_last_activity }
 
       context "when called with a DB contents of situation 2" do
-        before do
-          author_set_up_2
-        end
+        before { author_set_up_2 }
 
         it "orders the three authors correctly" do
           expect(subject.pluck(:id)).to eq([@author3.id, @author1.id, @author2.id])
@@ -44,14 +42,28 @@ RSpec.describe Author, type: :model do
       subject { described_class.order_by_book_count }
 
       context "when called with a DB contents of situation 1" do
-        before do
-          author_set_up_1
-        end
+        before { author_set_up_1 }
 
         it "orders the three authors correctly" do
           expect(subject.pluck(:id)).to eq([@author1.id, @author3.id, @author2.id])
         end
       end
+    end
+  end
+
+  describe "#bce?" do
+    subject { author.bce? }
+
+    context "when called on an author with :dob before current era" do
+      let(:author) { Author.new(dob: "January 8, 99 BC".to_date) }
+
+      it { is_expected.to eq(true) }
+    end
+
+    context "when called on an author with :dob in current era" do
+      let(:author) { Author.new(dob: "0-01-01".to_date) }
+
+      it { is_expected.to eq(false) }
     end
   end
 
