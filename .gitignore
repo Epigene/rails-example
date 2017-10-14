@@ -22,3 +22,5 @@ erd.pdf
 
 spec/group_profiling_results.csv
 spec/profiling_results.csv
+
+db/schema.rb
